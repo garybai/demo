@@ -1,0 +1,16 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: multidatasource-demo
+  datasource:
+    one:
+      url: jdbc:mysql://localhost/demo?characterEncoding=UTF-8&useSSL=false
+      username: developer
+      password: developer12321
+      type: com.alibaba.druid.pool.DruidDataSource
+    two:
+      url: jdbc:mysql://localhost/demo1?characterEncoding=UTF-8&useSSL=false
+      username: developer
+      password: developer12321
+      type: com.alibaba.druid.pool.DruidDataSource

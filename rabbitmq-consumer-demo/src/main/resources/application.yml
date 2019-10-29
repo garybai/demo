@@ -1,0 +1,23 @@
+server:
+  port: 8001
+
+spring:
+  rabbitmq:
+    addresses: localhost:5672
+    username: varys
+    password: varys12321
+    template:
+      retry:
+        enabled: true
+    publisher-confirms: true #开启发送确认
+    publisher-returns: true #开启失败退回
+    listener:
+      simple:
+        max-concurrency: 1 #最大并发消费者
+        concurrency: 1 #并发消费者
+        prefetch: 5 #一次向消费者投递多少条消息
+        acknowledge-mode: manual #开启ack，手动应答
+        retry:
+          enabled: true #是否支持重试
+        default-requeue-rejected: false
+    virtual-host: "/"

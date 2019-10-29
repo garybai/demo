@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.elasticsearchdemo.dao.ArticleDao">
+
+    <select id="getAll" resultType="article">
+        SELECT
+            a.art_id id,
+            a.art_title title,
+            cc.cts_classify_name category,
+            ac.act_content content,
+            ac.act_digest digest
+        FROM
+            tbl_varys_m_article a,
+            tbl_varys_m_article_content ac,
+            tbl_varys_d_content_classify cc
+        WHERE
+            a.art_id = ac.act_id
+            AND a.art_cts_id = cc.cts_id
+            AND a.art_type = 1
+            AND a.art_entrytime >= '2019-03-01'
+            ORDER BY a.art_entrytime
+            LIMIT 50001,10000
+    </select>
+
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.jwtdemo.dao.UserDao">
+
+    <select id="checkUserIsExist" resultType="int" parameterType="string">
+        SELECT
+            count( * )
+        FROM
+            t_user t
+        WHERE
+            t.us_username = #{username}
+    </select>
+
+    <select id="checkUserIsForbidden" resultType="int" parameterType="string">
+        SELECT
+            t.us_is_forbidden forbidden
+        FROM
+            t_user t
+        WHERE
+            t.us_username = #{username}
+    </select>
+
+    <select id="checkUsernameAndPassword" resultType="int" parameterType="usernameAndPasswordDTO">
+        SELECT
+            count( * )
+        FROM
+            t_user t
+        WHERE
+            t.us_username = #{username}
+            AND t.us_password = #{password}
+    </select>
+
+    <select id="findUserByUsername" resultType="userDO" parameterType="string">
+        SELECT
+            t.us_id id,
+            t.us_username username
+        FROM
+            t_user t
+        WHERE
+            t.us_username = #{username}
+
+    </select>
+
+</mapper>

@@ -1,0 +1,14 @@
+server:
+  port: 8000
+
+spring:
+  rabbitmq:
+    addresses: localhost:5672
+    username: varys
+    password: varys12321
+    template:
+      retry:
+        enabled: true
+    publisher-confirms: true #开启发送确认
+    publisher-returns: true #开启失败退回
+    virtual-host: "/"

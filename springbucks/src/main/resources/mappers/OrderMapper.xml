@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springbucks.dao.OrderDao">
+
+    <insert id="createOrderCoffee" parameterType="hashmap">
+        INSERT INTO t_order_coffee ( coffee_order_id, items_id )
+        VALUES
+        <foreach collection="coffeeIds" item="coffId" separator=",">
+            (#{id},#{coffId})
+        </foreach>
+    </insert>
+
+    <update id="updateState" parameterType="order">
+        UPDATE t_order
+          SET state = #{state}
+          WHERE
+              id = #{id}
+    </update>
+
+    <select id="findCoffeeListByOrderId" parameterType="long" resultType="coffee">
+        SELECT
+            c.*
+        FROM
+            t_coffee c,
+            t_order_coffee oc
+        WHERE
+            oc.coffee_order_id = #{id}
+            AND oc.items_id = c.id
+    </select>
+
+</mapper>

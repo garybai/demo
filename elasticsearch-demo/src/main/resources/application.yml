@@ -1,0 +1,65 @@
+server:
+  port: 9999
+
+spring:
+  application:
+    name: es-demo
+  main:
+    allow-bean-definition-overriding: true
+  data:
+    elasticsearch:
+      cluster-name: varys-es
+      repositories:
+        enabled: true
+      cluster-nodes: 117.78.27.206:9300
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://bj-cdb-jllri4sg.sql.tencentcdb.com:62645/varys_db?characterEncoding=UTF-8&useSSL=false
+      username: varys
+      password: varys12321
+      filters: stat,wall
+      initial-size: 3
+      min-idle: 1
+      max-active: 20
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      validation-query: select 'x'
+      max-wait: 6000
+      pool-prepared-statements: true
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 60000
+      web-stat-filter:
+        enabled: true
+        url-pattern: "/*"
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        reset-enable: false
+        login-username: admin
+        login-password: admin
+mybatis-plus:
+  mapper-locations: classpath:mappers/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.example.elasticsearchdemo.pojo
+  #  type-handlers-package: com.example.springbucks.handler
+  #  typeEnumsPackage: com.baomidou.springboot.entity.enums
+  global-config:
+    # 数据库相关配置
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: auto
+      #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+      field-strategy: not_empty
+      #数据库大写下划线转换
+      #capital-mode: true
+      #逻辑删除配置
+      logic-delete-value: 0
+      logic-not-delete-value: 1
+    #刷新mapper 调试神器
+    refresh: true
+  # 原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false

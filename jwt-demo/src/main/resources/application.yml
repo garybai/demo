@@ -1,0 +1,81 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: jwt-demo
+  main:
+    allow-bean-definition-overriding: true
+  redis:
+    host: localhost
+    port: 6379
+    password:
+    database: 0
+    lettuce:
+      pool:
+        max-active: 20
+        max-idle: 10
+        min-idle: 5
+        max-wait: 1000
+    timeout: 5000
+
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost/demo?characterEncoding=UTF-8&useSSL=false
+      username: developer
+      password: developer12321
+      filters: stat,wall
+      initial-size: 3
+      min-idle: 1
+      max-active: 20
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      validation-query: select 'x'
+      max-wait: 6000
+      pool-prepared-statements: true
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 60000
+      web-stat-filter:
+        enabled: true
+        url-pattern: "/*"
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        reset-enable: false
+        login-username: admin
+        login-password: admin
+#    data:
+#        mongodb:
+#            uri: mongodb://developer:developer12321@localhost:27017/springbucks
+#mybatis:
+#    configuration:
+#        map-underscore-to-camel-case: true
+#    type-handlers-package: com.example.springbucks.handler
+#    type-aliases-package: com.example.springbucks.pojo
+#    mapper1-locations: classpath:mappers/*.xml
+mybatis-plus:
+  mapper-locations: classpath:mapper1/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.example.jwtdemo.pojo
+  #  type-handlers-package: com.example.springbucks.handler
+  #  typeEnumsPackage: com.baomidou.springboot.entity.enums
+  global-config:
+    # 数据库相关配置
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: auto
+      #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+      field-strategy: not_empty
+      #数据库大写下划线转换
+      #capital-mode: true
+      #逻辑删除配置
+      logic-delete-value: 0
+      logic-not-delete-value: 1
+    #刷新mapper 调试神器
+    refresh: true
+  # 原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

@@ -1,0 +1,21 @@
+server:
+  port: 8088
+spring:
+  application:
+    name: mybatis-druid-demo
+#  datasource:
+      ##    druid:
+      ##      url: jdbc:mysql://localhost/demo?characterEncoding=UTF-8&useSSL=false
+      ##      username: developer
+    ##      password: developer12321
+    ##      driver-class-name: com.mysql.cj.jdbc.Driver
+  datasource:
+    url: jdbc:mysql://localhost/demo?characterEncoding=UTF-8&useSSL=false
+    username: developer
+    password: developer12321
+    type: com.alibaba.druid.pool.DruidDataSource
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.mybatisdruiddemo.model
+  configuration:
+    map-underscore-to-camel-case: true
