@@ -8,4 +8,6 @@ import java.util.List;
 public interface UserMapper1 {
 
     List<User> getAllUser();
+
+    int insertUser(String username, String password, Integer isForbidden);
 }

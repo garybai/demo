@@ -1,4 +1,4 @@
-package com.example.multidatasourcedemo.model;
+package com.example.dynamicdatasourcedemo.model;
 
 import lombok.Data;
 import org.apache.ibatis.type.Alias;
@@ -15,5 +15,5 @@ public class User {
     private Long usId;
     private String usUsername;
     private String usPassword;
-    private Integer usIsForbidden;
+    private String usIsForbidden;
 }

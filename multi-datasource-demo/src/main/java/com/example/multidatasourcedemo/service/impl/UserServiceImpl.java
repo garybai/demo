@@ -6,6 +6,7 @@ import com.example.multidatasourcedemo.model.User;
 import com.example.multidatasourcedemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,5 +33,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllUser2() {
         return userMapper2.getAllUser();
+    }
+
+    @Override
+    @Transactional(transactionManager = "transactionManager1")
+    public int insertUser1(String username, String password, Integer isForbidden) {
+        int insert = userMapper1.insertUser(username, password, isForbidden);
+        int i = 1 / isForbidden;
+        return insert;
+    }
+
+    @Override
+    @Transactional(transactionManager = "transactionManager2")
+    public int insertUser2(String username, String password, Integer isForbidden) {
+        int insert = userMapper2.insertUser(username, password, isForbidden);
+        int i = 1 / isForbidden;
+        return insert;
     }
 }

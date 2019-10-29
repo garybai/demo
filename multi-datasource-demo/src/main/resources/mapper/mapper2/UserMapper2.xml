@@ -6,4 +6,8 @@
         SELECT * FROM t_user t
     </select>
 
+    <insert id="insertUser" parameterType="user">
+        INSERT INTO t_user(us_username, us_password) VALUES (#{username}, #{password})
+    </insert>
+
 </mapper>

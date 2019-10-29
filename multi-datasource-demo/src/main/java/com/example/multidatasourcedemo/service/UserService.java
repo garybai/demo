@@ -10,4 +10,8 @@ public interface UserService {
 
     List<User> getAllUser2();
 
+    int insertUser1(String username, String password, Integer isForbidden);
+
+    int insertUser2(String username, String password, Integer isForbidden);
+
 }
