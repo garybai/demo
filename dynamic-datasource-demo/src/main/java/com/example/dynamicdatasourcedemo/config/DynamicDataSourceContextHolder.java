@@ -12,7 +12,7 @@ import java.util.List;
  **/
 public class DynamicDataSourceContextHolder {
 
-    private static final ThreadLocal<String> contextHolder = new ThreadLocal<String>() {
+    private static final ThreadLocal<String> CONTEXT_HOLDER = new ThreadLocal<String>() {
         /**
          * 将 dsOne 数据源的 key作为默认数据源的 key
          */
@@ -29,29 +29,32 @@ public class DynamicDataSourceContextHolder {
 
     /**
      * 切换数据源
+     *
      * @param key
      */
     public static void setDataSourceKey(String key) {
-        contextHolder.set(key);
+        CONTEXT_HOLDER.set(key);
     }
 
     /**
      * 获取数据源
+     *
      * @return
      */
     public static String getDataSourceKey() {
-        return contextHolder.get();
+        return CONTEXT_HOLDER.get();
     }
 
     /**
      * 重置数据源
      */
     public static void clearDataSourceKey() {
-        contextHolder.remove();
+        CONTEXT_HOLDER.remove();
     }
 
     /**
      * 判断是否包含数据源
+     *
      * @param key 数据源key
      * @return
      */
@@ -61,6 +64,7 @@ public class DynamicDataSourceContextHolder {
 
     /**
      * 添加数据源keys
+     *
      * @param keys
      * @return
      */

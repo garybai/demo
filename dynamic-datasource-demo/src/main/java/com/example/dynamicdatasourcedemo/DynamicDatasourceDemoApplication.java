@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class,
         DataSourceTransactionManagerAutoConfiguration.class,
         JdbcTemplateAutoConfiguration.class})
-//@ComponentScan(basePackages = "com.example.dynamicdatasourcedemo.mapper")
 public class DynamicDatasourceDemoApplication {
 
     public static void main(String[] args) {

@@ -45,9 +45,9 @@ public class MybatisConfig {
         Map<Object, Object> dataSourceMap = new HashMap<>(2);
         dataSourceMap.put("dsOne", dsOne());
         dataSourceMap.put("dsTwo", dsTwo());
-        // 将 master 数据源作为默认指定的数据源
+        // 将 one 数据源作为默认指定的数据源
         dynamicDataSource.setDefaultDataSource(dsOne());
-        // 将 master 和 slave 数据源作为指定的数据源
+        // 将 one 和 two 数据源作为指定的数据源
         dynamicDataSource.setDataSources(dataSourceMap);
         return dynamicDataSource;
     }
@@ -61,7 +61,7 @@ public class MybatisConfig {
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         sessionFactoryBean.setMapperLocations(resolver.getResources("classpath:mapper/*.xml"));    // 扫描映射文件
         org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
-        configuration.setMapUnderscoreToCamelCase(true);
+        configuration.setMapUnderscoreToCamelCase(true); // 开启驼峰下划线默认转换
         sessionFactoryBean.setConfiguration(configuration);
         return sessionFactoryBean.getObject();
     }
@@ -71,6 +71,5 @@ public class MybatisConfig {
         // 配置事务管理, 使用事务时在方法头部添加@Transactional注解即可
         return new DataSourceTransactionManager(dynamicDataSource());
     }
-
 
 }

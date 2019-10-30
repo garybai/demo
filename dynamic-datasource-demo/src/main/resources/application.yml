@@ -8,16 +8,14 @@ spring:
       url: jdbc:mysql://localhost/demo?characterEncoding=UTF-8&useSSL=false
       username: developer
       password: developer12321
-#      type: com.zaxxer.hikari.HikariDataSource
-#      type: com.alibaba.druid.pool.DruidDataSource
-#      driver-class-name: com.mysql.cj.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.cj.jdbc.Driver
     two:
       url: jdbc:mysql://localhost/demo1?characterEncoding=UTF-8&useSSL=false
       username: developer
       password: developer12321
-#      type: com.zaxxer.hikari.HikariDataSource
-#      type: com.alibaba.druid.pool.DruidDataSource
-#      driver-class-name: com.mysql.cj.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
