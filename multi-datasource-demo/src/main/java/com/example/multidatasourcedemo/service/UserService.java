@@ -14,4 +14,6 @@ public interface UserService {
 
     int insertUser2(String username, String password, Integer isForbidden);
 
+    int insertUser12(String username, String password, Integer isForbidden);
+
 }

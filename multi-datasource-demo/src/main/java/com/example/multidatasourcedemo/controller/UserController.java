@@ -3,7 +3,6 @@ package com.example.multidatasourcedemo.controller;
 import com.example.multidatasourcedemo.model.User;
 import com.example.multidatasourcedemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,7 +33,6 @@ public class UserController {
 
     }
 
-    @Transactional
     @RequestMapping(value = "/insertUser", method = RequestMethod.POST)
     public Integer insertUser(@RequestParam("username") String username, @RequestParam("password") String password,
                               @RequestParam("isForbidden") Integer isForbidden) {
@@ -42,4 +40,12 @@ public class UserController {
         int j = userService.insertUser2(username, password, isForbidden);
         return i + j ;
     }
+
+    @RequestMapping(value = "/insertUser12", method = RequestMethod.POST)
+    public Integer insertUser12(@RequestParam("username") String username, @RequestParam("password") String password,
+                              @RequestParam("isForbidden") Integer isForbidden) {
+        int i = userService.insertUser12(username, password, isForbidden);
+        return i;
+    }
+
 }
