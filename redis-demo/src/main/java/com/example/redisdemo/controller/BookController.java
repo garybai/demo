@@ -34,7 +34,7 @@ public class BookController {
     }
 
     @RequestMapping("/setString")
-    public void setString(@RequestParam String key, @RequestParam String value) {
+    public void setString(@RequestParam String key, @RequestParam String value) throws InterruptedException {
         bookService.setString(key, value);
     }
 }

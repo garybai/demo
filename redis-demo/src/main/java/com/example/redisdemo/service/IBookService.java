@@ -14,5 +14,5 @@ public interface IBookService {
 
     Book findById(Long id);
 
-    void setString(String key, String value);
+    void setString(String key, String value) throws InterruptedException;
 }

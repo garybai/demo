@@ -34,9 +34,12 @@ public class BookServiceImpl implements IBookService {
     }
 
     @Override
-    public void setString(String key, String value) {
+    public void setString(String key, String value) throws InterruptedException {
         Boolean absent = redisTemplate.opsForValue().setIfAbsent(key, value, 100, TimeUnit.SECONDS);
         System.out.println(absent);
+        Thread.sleep(1000);
+        //Object andSet = redisTemplate.opsForValue().getAndSet(key, value);
+        //System.out.println(andSet);
     }
 
 }
