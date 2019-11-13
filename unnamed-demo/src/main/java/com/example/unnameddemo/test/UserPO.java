@@ -21,6 +21,8 @@ public class UserPO {
 
     private Integer age;
 
+    private String tags;
+
     private CarPO carPO;
 
 }

@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * @author Gary
  * @className UserDTO
@@ -19,7 +21,7 @@ public class UserDTO {
 
     private String name;
 
-    private String aa;
+    private List<String> tags;
 
     private CarPO carPO;
 

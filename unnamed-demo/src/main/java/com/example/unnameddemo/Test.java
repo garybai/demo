@@ -5,9 +5,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -116,15 +114,17 @@ public class Test {
 
     public static void main(String[] args) {
 
-        Instant now = Instant.now();
-        int nano = now.getNano();
+        System.out.println(new Date());
+
+//        Instant now = Instant.now();
+//        int nano = now.getNano();
 
 
-        LocalDateTime dateTime = LocalDateTime.now();
-        String str = dateTime.format(DateTimeFormatter.ISO_DATE_TIME);
-        System.out.println(str);
-        str = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        System.out.println(str);
+//        LocalDateTime dateTime = LocalDateTime.now();
+//        String str = dateTime.format(DateTimeFormatter.ISO_DATE_TIME);
+//        System.out.println(str);
+//        str = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+//        System.out.println(str);
 
 //        IntSummaryStatistics summaryStatistics = Stream.of(1, 2, 3).mapToInt((i) -> i).summaryStatistics();
 //        System.out.println("max:" + summaryStatistics.getMax());

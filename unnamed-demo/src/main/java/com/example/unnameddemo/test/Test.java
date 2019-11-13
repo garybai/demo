@@ -2,9 +2,6 @@ package com.example.unnameddemo.test;
 
 import cn.hutool.core.bean.BeanUtil;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author Gary
  * @className Test
@@ -42,20 +39,27 @@ public class Test {
     public static void main(String[] args) {
 
         CarPO carPO = new CarPO(100L, "BMW");
-        UserPO userPO = new UserPO(1L, "aa", 10, carPO);
+        UserPO userPO = new UserPO(1L, "aa", 10, "社会,民生,生活", carPO);
         UserDTO userDTO = new UserDTO();
 
-        BeanUtil.copyProperties(userPO, userDTO, "name", "carPO");
-        System.out.println(userDTO);
-        Map<String, Object> x = BeanUtil.beanToMap(userDTO);
-        System.out.println(x);
+        try {
+            BeanUtil.copyProperties(userPO, userDTO);
+            System.out.println(userPO);
+            System.out.println(userDTO);
+            System.out.println(userDTO.getTags().size());
+        }catch (Exception e){
+            System.out.println("转换错误");
+        }
 
-        Map<String, Object> y = new HashMap<>(4);
-        y.put("id", 10L);
-        y.put("name", "bb");
-        y.put("carPO", carPO);
-        UserDTO userDTO1 = new UserDTO();
-        System.out.println(BeanUtil.fillBeanWithMap(y, userDTO1, true));
+//        Map<String, Object> x = BeanUtil.beanToMap(userDTO);
+//        System.out.println(x);
+
+//        Map<String, Object> y = new HashMap<>(4);
+//        y.put("id", 10L);
+//        y.put("name", "bb");
+//        y.put("carPO", carPO);
+//        UserDTO userDTO1 = new UserDTO();
+//        System.out.println(BeanUtil.fillBeanWithMap(y, userDTO1, true));
 
     }
 }
