@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatisplusdemo.mapper.BookMapper">
+
+    <select id="findBookByAuthorName" parameterType="java.lang.String"
+            resultType="com.example.mybatisplusdemo.domain.BookDO">
+        SELECT
+            b.*
+        FROM
+            t_book b,
+            t_author a
+        WHERE
+            b.au_id = a.id
+          AND a.name = #{name}
+    </select>
+
+    <select id="findBookByAuthorId" parameterType="java.lang.Integer"
+            resultType="com.example.mybatisplusdemo.domain.BookDO">
+        SELECT
+            b.*
+        FROM
+            t_book b,
+            t_author a
+        WHERE
+            b.au_id = a.id
+          AND a.id = #{id}
+        ORDER BY
+          id DESC
+        </select>
+
+</mapper>

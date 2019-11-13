@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatisplusdemo.mapper.AuthorMapper">
+
+
+    <select id="findAuthorByName" parameterType="java.lang.String" resultType="com.example.mybatisplusdemo.domain.AuthorDO">
+        SELECT
+          *
+        FROM
+          t_author
+        WHERE
+          name = #{name}
+    </select>
+</mapper>
