@@ -27,6 +27,7 @@ public class UserController {
     }
 
     @ApiOperation("通过id查找用户接口")
+    @ApiImplicitParam(name = "id", value = "用户id", defaultValue = "1", required = true)
     @GetMapping("/find/{id}")
     public User findById(@PathVariable("id") int id) {
         User user = new User();
@@ -39,7 +40,7 @@ public class UserController {
     @ApiOperation("更新用户信息接口")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "user", value = "用户实体", required = true, dataType = "User"),
-            @ApiImplicitParam(name = "name", value = "名称", required = true, dataType = "String")
+            @ApiImplicitParam(name = "name", value = "名称", defaultValue = "张三",required = true, dataType = "String")
     })
     @PutMapping("/update")
     public boolean update(@RequestBody User user, @RequestParam String name) {
