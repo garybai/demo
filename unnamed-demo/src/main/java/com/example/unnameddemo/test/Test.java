@@ -1,7 +1,5 @@
 package com.example.unnameddemo.test;
 
-import cn.hutool.core.bean.BeanUtil;
-
 /**
  * @author Gary
  * @className Test
@@ -38,18 +36,19 @@ public class Test {
 //    }
     public static void main(String[] args) {
 
-        CarPO carPO = new CarPO(100L, "BMW");
-        UserPO userPO = new UserPO(1L, "aa", 10, "社会,民生,生活", carPO);
-        UserDTO userDTO = new UserDTO();
 
-        try {
-            BeanUtil.copyProperties(userPO, userDTO);
-            System.out.println(userPO);
-            System.out.println(userDTO);
-            System.out.println(userDTO.getTags().size());
-        }catch (Exception e){
-            System.out.println("转换错误");
-        }
+//        CarPO carPO = new CarPO(100L, "BMW");
+//        UserPO userPO = new UserPO(1L, "aa", 10, "社会,民生,生活", carPO);
+//        UserDTO userDTO = new UserDTO();
+//
+//        try {
+//            BeanUtil.copyProperties(userPO, userDTO);
+//            System.out.println(userPO);
+//            System.out.println(userDTO);
+//            System.out.println(userDTO.getTags().size());
+//        }catch (Exception e){
+//            System.out.println("转换错误");
+//        }
 
 //        Map<String, Object> x = BeanUtil.beanToMap(userDTO);
 //        System.out.println(x);
