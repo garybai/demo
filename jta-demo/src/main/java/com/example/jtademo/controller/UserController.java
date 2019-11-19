@@ -44,6 +44,14 @@ public class UserController {
         return i + j ;
     }
 
+    @Transactional
+    @RequestMapping(value = "/insertUser1", method = RequestMethod.POST)
+    public Integer insertUser1(@RequestParam("username") String username, @RequestParam("password") String password,
+                              @RequestParam("isForbidden") Integer isForbidden) {
+        int i = userService.insertUser1(username, password, isForbidden);
+        return i;
+    }
+
     @RequestMapping(value = "/insertUser12", method = RequestMethod.POST)
     public Integer insertUser12(@RequestParam("username") String username, @RequestParam("password") String password,
                               @RequestParam("isForbidden") Integer isForbidden) {
