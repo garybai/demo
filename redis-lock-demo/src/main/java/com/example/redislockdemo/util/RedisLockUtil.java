@@ -44,6 +44,7 @@ public class RedisLockUtil {
                 System.out.println(Thread.currentThread().getName() + "未获取锁。。。超时");
                 return false;
             }
+            // 相当于 redis 的 setnx 命令，如果 key 不存在，则 set value，如果存在，不做任何操作
             Boolean absent = redisTemplate.opsForValue().setIfAbsent(key, value, lockTime, TimeUnit.MILLISECONDS);
             if (absent == null) {
                 return false;
@@ -69,6 +70,9 @@ public class RedisLockUtil {
         ExpirationRenewal expirationRenewal = currentThread.get();
         expirationRenewal.stop();
         currentThread.remove();
+
+        // 判断只有当 value 相等的时候（也就是同一个线程）才去解锁
+        // lua 脚本保证解锁原子性
         Long execute = redisTemplate.execute(unlockScript, Arrays.asList(key, value));
         if (SUCCESS.equals(execute)) {
             System.out.println(Thread.currentThread().getName() + "解锁成功 " + LocalTime.now());
@@ -83,6 +87,7 @@ public class RedisLockUtil {
         ExpirationRenewal expirationRenewal = new ExpirationRenewal(key, value);
         Thread renewalThread = new Thread(expirationRenewal);
         renewalThread.start();
+        System.out.println(Thread.currentThread().getName() + "调用" + renewalThread.getName() + "刷新过期时间 " + LocalTime.now());
         return expirationRenewal;
     }
 
@@ -93,8 +98,8 @@ public class RedisLockUtil {
 
         private String key;
         private String value;
+        // 控制刷新过期时间的线程是否开启
         private boolean stop = false;
-
 
         public ExpirationRenewal(String key, String value) {
             this.key = key;
@@ -109,7 +114,7 @@ public class RedisLockUtil {
         public void run() {
             while (!stop) {
 //                System.out.println("执行延迟失效时间中...");
-                System.out.println(Thread.currentThread().getName() + "renewal " + LocalTime.now());
+                System.out.println(Thread.currentThread().getName() + "刷新 " + LocalTime.now());
                 redisTemplate.execute(renewalScript, Arrays.asList(key), value, "5");
 
                 //休眠1秒
@@ -126,6 +131,7 @@ public class RedisLockUtil {
         }
     }
 
+    // 解锁的 lua 脚本
     @Bean(name = "unlockScript")
     public DefaultRedisScript<Long> unlockScript() {
         String script = "if redis.call('get', KEYS[1]) == KEYS[2] then " +
@@ -138,6 +144,7 @@ public class RedisLockUtil {
         return defaultRedisScript;
     }
 
+    // 刷新过期时间的 lua 脚本
     @Bean(name = "renewalScript")
     public DefaultRedisScript<Long> renewalScript() {
         String script = "if redis.call('get', KEYS[1]) == ARGV[1] then " +

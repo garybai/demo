@@ -3,6 +3,7 @@ package com.example.redislockdemo.controller;
 import com.example.redislockdemo.util.RedisLockUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,12 +27,15 @@ public class TestController {
     @Autowired
     RedisLockUtil redisLockUtil;
 
+    @Autowired
+    RedisTemplate redisTemplate;
+
     @RequestMapping("/index")
     public String index() throws InterruptedException {
 
         ArrayList<String> arrayList = new ArrayList<>(10);
 
-        int clientcount = 5;
+        int clientcount = 10;
         String key = "lock1";
         CountDownLatch countDownLatch = new CountDownLatch(clientcount);
 
@@ -43,7 +47,6 @@ public class TestController {
                 try {
 
                     if (redisLockUtil.lock(key, value)){
-                        //System.out.println(Thread.currentThread().getName() + "获取到锁");
                         try {
                             // 获取到锁之后休眠 3s，模拟业务逻辑
                             Thread.sleep(3000);
@@ -51,19 +54,16 @@ public class TestController {
                             e.printStackTrace();
                         }
                         arrayList.add(Thread.currentThread().getName());
-                    } else {
-//                        System.out.println(Thread.currentThread().getName() + "未获取到锁");
                     }
                 } finally {
                     redisLockUtil.unlock(key, value);
-//                    System.out.println(Thread.currentThread().getName() + "释放锁");
                 }
                 countDownLatch.countDown();
             });
         }
         countDownLatch.await();
         long end = System.currentTimeMillis();
-        log.info("执行线程数:{},总耗时:{},count数为:{}", clientcount, end - start);
+        log.info("执行线程数:{},总耗时:{}", clientcount, end - start);
         arrayList.forEach(System.out::println);
         return "Hello";
     }
