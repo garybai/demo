@@ -5,7 +5,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -112,10 +112,52 @@ public class Test {
         return len1 - len2;
     }
 
+    public static boolean push(Integer a) {
+        if (a == 10) {
+            return false;
+        }
+        return Math.random() > 0.1;
+    }
+
+    public static void batchPush(ArrayList<Integer> list, Integer n) {
+
+        if (n > 3) {
+            return;
+        }
+        System.out.println("第" + n + "次推送");
+        if (list == null || list.size() == 0) {
+            return;
+        }
+        ArrayList<Integer> faildList = new ArrayList<>();
+        for (Integer a : list) {
+            boolean push = push(a);
+            if (!push) {
+                System.out.println(a + "失败");
+                faildList.add(a);
+            } else {
+                System.out.println(a + "成功");
+            }
+        }
+
+        System.out.println("失败" + faildList.size() + "条----");
+        n++;
+        if (faildList.size() != 0) {
+            batchPush(faildList, n);
+        }
+    }
+
     public static void main(String[] args) {
 
-        System.out.println(new Date());
+        ArrayList<Integer> list = new ArrayList<>(1000);
+        for (int i = 0; i < 1000; i++) {
+            list.add(i);
+        }
 
+        batchPush(list, 1);
+
+
+
+//        System.out.println(list.size());
 //        Instant now = Instant.now();
 //        int nano = now.getNano();
 
