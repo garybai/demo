@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author Gary
- * @className RedissionProperties
+ * @className RedissonProperties
  * @description TODO
  * @date 2019/11/19 15:18
  **/

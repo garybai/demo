@@ -24,7 +24,7 @@ public class NameThreadFactory implements ThreadFactory {
     @Override
     public Thread newThread(Runnable r) {
         Thread thread = new Thread(r, "mythread-" + myThreadNnum.getAndIncrement());
-        System.out.println(thread.getName() + " has been created");
+//        System.out.println(thread.getName() + " has been created");
         return thread;
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Gary
- * @className RedissionConfig
+ * @className RedissonConfig
  * @description TODO
  * @date 2019/11/19 15:21
  **/
