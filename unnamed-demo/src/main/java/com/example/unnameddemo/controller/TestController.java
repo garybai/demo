@@ -19,6 +19,13 @@ import java.util.Map;
 @RestController
 public class TestController {
 
+    /**
+     * @description: f
+     * @param model:
+     * @return java.lang.String
+     * @author: Gary
+     * @date: 2019/11/26 16:12
+     */
     @GetMapping("/hello")
     public String hello(Model model) {
         System.out.println(model);
@@ -28,6 +35,15 @@ public class TestController {
         return "hello controller advice";
     }
 
+
+    /**
+     * @description: 添加 book
+     * @param book:
+     * @param author:
+     * @return void
+     * @author: Gary
+     * @date: 2019/11/26 16:11
+     */
     @PostMapping("/book")
     public void addBook(@ModelAttribute("b") Book book, @ModelAttribute("a") Author author) {
         System.out.println(book);
