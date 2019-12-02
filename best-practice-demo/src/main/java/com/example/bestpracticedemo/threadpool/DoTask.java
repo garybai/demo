@@ -52,6 +52,7 @@ public class DoTask {
         });
 
         executor.submit(futureTask1);
+        TimeUnit.MILLISECONDS.sleep(500);
         executor.submit(futureTask2);
         System.out.println(futureTask2.get());
     }
