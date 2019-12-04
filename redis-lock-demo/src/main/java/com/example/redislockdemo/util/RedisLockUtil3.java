@@ -31,7 +31,7 @@ public class RedisLockUtil3 {
                 return false;
             }
             // 给锁设置了默认 30s 的过期时间，如果服务器宕机不能主动解锁，则 key 到期会失效，避免死锁问题
-            Boolean absent = redisTemplate.opsForValue().setIfAbsent(key, "1", timeout, TimeUnit.MILLISECONDS);
+            Boolean absent = redisTemplate.opsForValue().setIfAbsent(key, value, timeout, TimeUnit.MILLISECONDS);
             if (absent == null) {
                 return false;
             }
