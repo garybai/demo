@@ -6,7 +6,7 @@ package com.example.structurealgorithmdemo.linkedlist;
  * @description TODO
  * @date 2019/11/17 0:13
  **/
-public class TestSingleLinkedList {
+public class SingleLinkedListTest {
 
     public static void main(String[] args) {
         SingleLinkedList singleLinkedList = new SingleLinkedList();
