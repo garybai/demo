@@ -15,39 +15,57 @@ import java.util.concurrent.TimeUnit;
  **/
 public class CountdownLatchTest {
 
-    public static void main(String[] args) {
-        CountDownLatch countDownLatch = new CountDownLatch(2);
+    public static void main(String[] args) throws InterruptedException {
         System.out.println("主线程开始。" + LocalTime.now());
-        ExecutorService es1 = Executors.newSingleThreadExecutor();
-        es1.execute(()->{
-            System.out.println("子线程 1 开始执行。" + LocalTime.now());
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println("子线程 1 执行完毕。" + LocalTime.now());
+        ExecutorService es = Executors.newFixedThreadPool(2);
+        CountDownLatch countDownLatch = new CountDownLatch(2);
+        es.execute(() -> {
+            getPOrders();
             countDownLatch.countDown();
         });
-        es1.shutdown();
-        ExecutorService es2 = Executors.newSingleThreadExecutor();
-        es2.execute(()->{
-            System.out.println("子线程 2 开始执行。" + LocalTime.now());
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println("子线程 2 执行完毕。" + LocalTime.now());
+        es.execute(() -> {
+            getDOrders();
             countDownLatch.countDown();
         });
-        es2.shutdown();
         System.out.println("等等两个线程执行完毕。" + LocalTime.now());
+
+        countDownLatch.await();
+
+        System.out.println("两个子线程都执行完毕。" + LocalTime.now());
+        check();
+        save();
+        es.shutdown();
+    }
+
+    private static void sleep(Integer timeout) {
         try {
-            countDownLatch.await();
+            TimeUnit.SECONDS.sleep(timeout);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("两个子线程都执行完毕。" + LocalTime.now());
+    }
+
+    private static void getPOrders() {
+        System.out.println(Thread.currentThread().getName() + "开始执行getPOrders " + LocalTime.now());
+        sleep(3);
+        System.out.println(Thread.currentThread().getName() + "执行getPOrders完毕 " + LocalTime.now());
+    }
+
+    private static void getDOrders() {
+        System.out.println(Thread.currentThread().getName() + "开始执行getDOrders " + LocalTime.now());
+        sleep(5);
+        System.out.println(Thread.currentThread().getName() + "执行getDOrders完毕 " + LocalTime.now());
+    }
+
+    private static void check() {
+        System.out.println(Thread.currentThread().getName() + "开始执行check " + LocalTime.now());
+        sleep(1);
+        System.out.println(Thread.currentThread().getName() + "执行check完毕 " + LocalTime.now());
+    }
+
+    private static void save() {
+        System.out.println(Thread.currentThread().getName() + "开始执行save " + LocalTime.now());
+        sleep(1);
+        System.out.println(Thread.currentThread().getName() + "执行save完毕 " + LocalTime.now());
     }
 }
