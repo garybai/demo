@@ -20,7 +20,7 @@ public class SingleLinkedList {
     }
 
     // 链表的每个节点
-    private class Node {
+    private static class Node {
         private Object data; // 存储数据
         private Node next; // 指向下一个节点
 
@@ -42,13 +42,16 @@ public class SingleLinkedList {
     }
 
     // 删除链表头
-    public void removeHead() {
+    public Object removeHead() {
+        Object o = head.data;
         head = head.next;
         size--;
+        return o;
     }
 
     // 查找指定元素
     public Node find(Object object) {
+        // 从头节点开始遍历
         Node temp = head;
         int tempSize = size;
         while (tempSize > 0) {
@@ -68,8 +71,10 @@ public class SingleLinkedList {
             return false;
         }
         Node temp = head;
+        // 存储上一个节点，因为删除后需要将上一个节点的指针指向下一个节点
         Node prev = head;
         while (temp.data != object) {
+            // 循环到尾节点如果未找到指定元素
             if (temp.next == null) {
                 return false;
             } else {
