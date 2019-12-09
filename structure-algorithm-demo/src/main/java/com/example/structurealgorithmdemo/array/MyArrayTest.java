@@ -18,6 +18,15 @@ public class MyArrayTest {
         System.out.println(array.getSize());
         array.display();
         System.out.println();
+        System.out.println(array.find(3));
+        System.out.println("-----");
+        System.out.println(array.findReverse(0));
+        System.out.println(array.findReverse(1));
+        System.out.println(array.findReverse(2));
+        System.out.println(array.findReverse(3));
+        System.out.println(array.findReverse(4));
+        System.out.println(array.findReverse(5));
+        System.out.println("-----");
         System.out.println(array.get(2));
         array.delete(2);
         array.display();

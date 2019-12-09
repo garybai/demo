@@ -1,4 +1,4 @@
-package com.example.structurealgorithmdemo.array;
+package com.example.structurealgorithmdemo.lru;
 
 /**
  * 自己封装的数组
@@ -57,20 +57,48 @@ public class MyArray {
         for (int i = 0; i < elements; i++) {
             System.out.print(intArr[i] + " ");
         }
+        System.out.println("");
     }
 
     /**
-     * 添加元素，默认不能添加重复元素
+     * 数组尾部添加元素，默认不能添加重复元素
      *
      * @param value
      * @return 添加成功返回 true，添加失败返回 false，如果数组已满，添加失败
      */
-    public boolean add(int value) {
+    public boolean addTail(int value) {
         if (elements == length) {
             return false;
         }
         intArr[elements] = value;
         elements++;
+        return true;
+    }
+
+    /**
+     * 数组头部添加元素
+     *
+     * @param value
+     * @return
+     */
+    public boolean addHead(int value) {
+        if (elements == length) {
+            return false;
+        }
+        if (elements == 0){
+            intArr[0] = value;
+            elements++;
+            return true;
+        }
+
+        elements++;
+        int temp = elements - 1;
+        while (temp >= 1){
+            intArr[temp] = intArr[temp - 1];
+            temp--;
+        }
+
+        intArr[0] = value;
         return true;
     }
 
@@ -126,14 +154,18 @@ public class MyArray {
     }
 
     /**
-     * 删除元素
+     * 根据值删除元素
      *
      * @param value
      * @return 删除成功返回 true，删除失败返回 false，删除的值不存在，返回 false
      */
     public boolean delete(int value) {
         int index = find(value);
-        if (index == -1) {
+        return deleteByIndex(index);
+    }
+
+    public boolean deleteByIndex(int index) {
+        if (index < 0 || index >= elements) {
             return false;
         }
         if (index == elements - 1) {
