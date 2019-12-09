@@ -1,5 +1,7 @@
 package com.example.structurealgorithmdemo.stack;
 
+import java.util.Stack;
+
 /**
  * 基于数组的栈测试
  *
@@ -32,6 +34,16 @@ public class MyArrayStackTest {
         }
         while (!stack1.isEmpty()) {
             System.out.print(stack1.pop());
+        }
+        System.out.println();
+
+        // jdk 自带栈
+        Stack<Character> stack3 = new Stack<>();
+        for (char c : chars) {
+            stack3.push(c);
+        }
+        while (!stack3.isEmpty()) {
+            System.out.print(stack3.pop());
         }
         System.out.println();
 
@@ -70,7 +82,5 @@ public class MyArrayStackTest {
                     break;
             }
         }
-
     }
-
 }
