@@ -3,7 +3,7 @@ server:
 
 spring:
   rabbitmq:
-    addresses: localhost:5672
+    addresses: 62.234.173.137:5672
     username: varys
     password: varys12321
     template:
