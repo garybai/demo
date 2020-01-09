@@ -24,6 +24,11 @@ public class ScheduleTestController {
         scheduleService.setCronTask(taskName);
     }
 
+    @PostMapping("/set1")
+    public void setOnce(@RequestParam("taskName") String taskName){
+        scheduleService.setTaskOnce(taskName);
+    }
+
     @PostMapping("/cancle")
     public void cancle(@RequestParam("name") String name){
         scheduleService.cancleCronTask(name);

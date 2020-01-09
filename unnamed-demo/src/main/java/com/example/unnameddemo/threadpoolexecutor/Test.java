@@ -1,7 +1,9 @@
 package com.example.unnameddemo.threadpoolexecutor;
 
+
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -13,11 +15,11 @@ import java.util.concurrent.*;
  **/
 public class Test {
 
-    private static BlockingQueue<Runnable> blockingDeque = new LinkedBlockingDeque<>(10);
+    private static BlockingQueue<Runnable> blockingDeque = new LinkedBlockingDeque<>();
     private static ThreadFactory threadFactory = new NameThreadFactory();
     private static RejectedExecutionHandler rejectedExecutionHandler = new MyIgnorePolicy();
     private static ThreadPoolExecutor threadPoolExecutor =
-            new ThreadPoolExecutor(5, 10, 10,
+            new ThreadPoolExecutor(6, 6, 0,
                     TimeUnit.SECONDS, blockingDeque, threadFactory, rejectedExecutionHandler);
 
     private static void test() throws ExecutionException, InterruptedException {
@@ -52,9 +54,76 @@ public class Test {
 
     }
 
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
+    private static int count1 = 60000;
+    private static int count2 = 600;
 
-        test();
+    public static void cal(){
+        int sum = 0;
+        for (int i = 0; i < 100000000; i++) {
+            sum +=i;
+        }
+    }
+
+    public static void task(List<Object> list) {
+        list.forEach(a -> {
+            cal();
+        });
+    }
+
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        List<List<Object>> list1 = new ArrayList<>(count1);
+        for (int i = 0; i < count1; i++) {
+            list1.add(Collections.singletonList(i));
+        }
+        List<Object> list2 = new ArrayList<>(count2);
+        for (int i = 0; i < count2; i++) {
+            list2.add(i);
+        }
+
+        ExecutorService es = Executors.newFixedThreadPool(6);
+        ExecutorService es1 = Executors.newFixedThreadPool(256);
+        CountDownLatch countDownLatch = new CountDownLatch(count1);
+        long l = System.currentTimeMillis();
+        for (int i = 0; i < count1; i++) {
+            int i1 = i;
+            es.execute(() -> {
+                task(list1.get(i1));
+                countDownLatch.countDown();
+            });
+        }
+        countDownLatch.await();
+        long l1 = System.currentTimeMillis();
+        System.out.println(l1 - l);
+
+//        CountDownLatch countDownLatch1 = new CountDownLatch(count1);
+//        long l2 = System.currentTimeMillis();
+//        for (int i = 0; i < count1; i++) {
+//            int i1 = i;
+//            es1.execute(() -> {
+//                task(list1.get(i1));
+//                countDownLatch1.countDown();
+//            });
+//        }
+//        countDownLatch1.await();
+//        long l3 = System.currentTimeMillis();
+//        System.out.println(l3 - l2);
+
+        CountDownLatch countDownLatch1 = new CountDownLatch(100);
+        long l2 = System.currentTimeMillis();
+        for (int i = 0; i < 100; i++) {
+            threadPoolExecutor.execute(() -> {
+                task(list2);
+                countDownLatch1.countDown();
+            });
+        }
+        countDownLatch1.await();
+        long l3 = System.currentTimeMillis();
+        System.out.println(l3 - l2);
+
+        es.shutdown();
+        es1.shutdown();
+
+//        test();
 
 //        for (int i = 1; i <= 10; i++) {
 //            Runnable runnable = new TaskWithoutResult(String.valueOf(i));

@@ -5,6 +5,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledFuture;
@@ -26,6 +27,12 @@ public class DynamicTask {
 
     public void setCron(String taskName, String cron, Runnable runnable) {
         ScheduledFuture<?> future = threadPoolTaskScheduler.schedule(runnable, new CronTrigger(cron));
+        assert future != null;
+        map.put(taskName, future);
+    }
+
+    public void setCron(String taskName, Date dateTime, Runnable runnable) {
+        ScheduledFuture<?> future = threadPoolTaskScheduler.schedule(runnable, dateTime);
         assert future != null;
         map.put(taskName, future);
     }
