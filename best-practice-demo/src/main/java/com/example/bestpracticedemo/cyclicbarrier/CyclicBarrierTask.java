@@ -106,8 +106,11 @@ class CyclicBarrierTask {
         /**
          * 从两个队列取出订单和派送单进行 check
          */
-        String p = pos.remove(0);
-        String d = dos.remove(0);
+        String p, d;
+        synchronized (this){
+            p = pos.remove(0);
+            d = dos.remove(0);
+        }
         sleep(1);
         System.out.println(Thread.currentThread().getName() + "执行check完毕 " + p + d + LocalTime.now());
         save();
