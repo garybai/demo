@@ -14,4 +14,10 @@ public class UnnamedDemoApplication {
         SpringApplication.run(UnnamedDemoApplication.class, args);
     }
 
+//    public static void main(String[] args) {
+//        SpringApplication application = new SpringApplication(UnnamedDemoApplication.class);
+//        application.addListeners(new ApplicationPidFileWriter("/Users/Gary/unname.pid"));
+//        application.run(args);
+//    }
+
 }

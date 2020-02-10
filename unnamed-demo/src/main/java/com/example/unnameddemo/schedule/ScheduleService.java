@@ -27,7 +27,7 @@ public class ScheduleService {
     }
 
     public void setTaskOnce(String taskName){
-        String sDate = "2020-01-04 18:50:00";
+        String sDate = "2020-01-13 19:00:00";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         try {
             Date date = sdf.parse(sDate);

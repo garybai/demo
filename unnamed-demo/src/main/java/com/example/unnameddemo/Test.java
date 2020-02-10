@@ -5,8 +5,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Gary
@@ -147,14 +146,14 @@ public class Test {
     }
 
     public static void main(String[] args) {
+        test();
 
-        ArrayList<Integer> list = new ArrayList<>(1000);
-        for (int i = 0; i < 1000; i++) {
-            list.add(i);
-        }
-
-        batchPush(list, 1);
-
+//        ArrayList<Integer> list = new ArrayList<>(1000);
+//        for (int i = 0; i < 1000; i++) {
+//            list.add(i);
+//        }
+//
+//        batchPush(list, 1);
 
 
 //        System.out.println(list.size());
@@ -261,6 +260,63 @@ public class Test {
 //        list.stream().forEach(System.out::println);
 //        int[] nums = new int[]{1, 2, 3, 4, 5};
 //        Arrays.stream(nums).forEach(System.out::println);
+    }
+
+    public static void test() {
+        List<Object> l1 = new ArrayList<>();
+        System.out.println(l1.size());
+        l1.add(1);
+        l1.add(2);
+        l1.add(3);
+        System.out.println(l1);
+        l1.add(1,"a");
+        System.out.println(l1);
+        l1.set(1,"n");
+        System.out.println(l1);
+        List<Object> l2 = new LinkedList<>();
+        List<Object> l3 = new Vector<>();
+        List<Object> l4 =  new Stack<>();
+
+        Set<Object> s1 = new HashSet<>();
+        Set<Object> s2 = new LinkedHashSet<>();
+        Set<Object> s = new TreeSet<>();
+
+        Queue<Object> queue = new PriorityQueue<>();
+
+        Map<String, Object> table = new Hashtable<>();
+        Map<String, Object> map3 = new LinkedHashMap<>();
+        Map<String, Object> map4 = new TreeMap<>();
+        Map<String, String> map = new HashMap<>(4);
+        map.put("xsd", "aaa");
+        map.put("vdw", "ccc");
+        map.put("wqt", "ddd");
+        map.put("fwe", "bbb");
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            System.out.println("key:" + entry.getKey() + "\tvalue:" + entry.getValue());
+        }
+
+        Set<Map.Entry<String, String>> sets = map.entrySet();
+        LinkedList<Map.Entry<String, String>> linkedList = new LinkedList<>(sets);
+
+        linkedList.sort(Comparator.comparing(Map.Entry::getValue));
+        Map<String, String> map1 = new LinkedHashMap<>();
+        for (Map.Entry<String, String> entry : linkedList){
+            map1.put(entry.getKey(), entry.getValue());
+        }
+
+        for (Map.Entry<String, String> entry : map1.entrySet()) {
+            System.out.println("key:" + entry.getKey() + "\tvalue:" + entry.getValue());
+        }
+
+        Map<String, String> map2 = new TreeMap<>();
+        map2.put("xsd", "aaa");
+        map2.put("vdw", "ccc");
+        map2.put("wqt", "ddd");
+        map2.put("fwe", "bbb");
+        for (Map.Entry<String, String> entry : map2.entrySet()) {
+            System.out.println("key:" + entry.getKey() + "\tvalue:" + entry.getValue());
+        }
+
     }
 
 

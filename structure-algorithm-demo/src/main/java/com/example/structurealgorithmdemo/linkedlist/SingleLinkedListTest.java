@@ -18,6 +18,8 @@ public class SingleLinkedListTest {
         singleLinkedList.addHead("D");
         singleLinkedList.addHead("E");
         singleLinkedList.getAll();
+        singleLinkedList.reverse();
+        singleLinkedList.getAll();
 
         singleLinkedList.remove("C");
         singleLinkedList.getAll();

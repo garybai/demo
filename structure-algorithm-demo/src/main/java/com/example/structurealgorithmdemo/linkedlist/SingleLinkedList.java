@@ -93,6 +93,26 @@ public class SingleLinkedList {
         return true;
     }
 
+    /**
+     * 链表逆序
+     */
+    public void reverse() {
+        if (head == null || head.next == null) {
+            return;
+        }
+        Node p = head;
+        Node q = head.next;
+        p.next = null;
+        Node tmp;
+        while (q != null) {
+            tmp = q.next;
+            q.next = p;
+            p = q;
+            q = tmp;
+        }
+        head = p;
+    }
+
     // 判断链表是否为空
     public boolean isEmpty() {
         return (size == 0);
