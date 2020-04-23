@@ -89,7 +89,7 @@ public class MyLock {
         }
     }
 
-    private class Buffer {
+    private static class Buffer {
         private static final int MAX_CAPACITY = 1;
         private List<Object> innerList = new ArrayList<>(MAX_CAPACITY);
 

@@ -54,7 +54,7 @@ public class MyArrayStackTest {
 //        }
 
         MyArrayStack stack2 = new MyArrayStack();
-        String str = "12<a[b{c}]>>";
+        String str = "12<a[b{c}]}";
         char[] chr = str.toCharArray();
         for (char c : chr) {
             switch (c) {

@@ -13,15 +13,15 @@ public class Sort {
 
     public static void main(String[] args) {
         int[] arr = {7, 6, 5, 1, 3, 2};
-        System.out.println(Arrays.toString(arr));
+//        System.out.println(Arrays.toString(arr));
 //        bubboSort(arr, arr.length);
 //        insertionSort(arr, arr.length);
 //        selectionSort(arr, arr.length);
 //        int[] arr1 = mergeSort(arr, arr.length);
-        quickSort(arr, 0, arr.length - 1);
-        System.out.println(Arrays.toString(arr));
+//        quickSort(arr, 0, arr.length - 1);
+//        System.out.println(Arrays.toString(arr));
+        System.out.println(aaa(12));
     }
-
 
 
     /**
@@ -153,6 +153,7 @@ public class Sort {
             // 内层循环，在已排序的元素中倒序比较
             for (; j >= 0; j--) {
                 // 如果该元素大于新元素，那么就将该元素下移一位
+                // 1 3 4 7 5 9
                 if (a[j] > value) {
                     a[j + 1] = a[j];
                 } else {
@@ -189,6 +190,32 @@ public class Sort {
                 }
             }
         }
+    }
+
+    public static int aaa(int n) {
+        int[] sq = new int[(int) (Math.sqrt(n - 1) + 1)];
+        for (int i = 1; i < n; i++) {
+            if (i * i <= n) {
+                sq[i - 1] = i * i;
+            } else {
+                break;
+            }
+        }
+
+        int[] dp = new int[n + 1];
+        for (int i = 1; i < n; i++) {
+            dp[i] = Integer.MAX_VALUE;
+            for (int j = 0; j < sq.length; j++) {
+                if (sq[j] <= i) {
+                    dp[i] = Math.min(dp[i - 1], dp[i - sq[j]] + 1);
+                } else {
+                    break;
+                }
+            }
+        }
+
+        System.out.println(Arrays.toString(dp));
+        return dp[n];
     }
 
 }

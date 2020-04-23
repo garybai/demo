@@ -20,12 +20,15 @@ public class SingleLinkedList {
     }
 
     // 链表的每个节点
-    private static class Node {
+    public static class Node {
         private Object data; // 存储数据
         private Node next; // 指向下一个节点
 
         public Node(Object data) {
             this.data = data;
+        }
+        public Object getValue() {
+            return data;
         }
     }
 
@@ -111,6 +114,31 @@ public class SingleLinkedList {
             q = tmp;
         }
         head = p;
+    }
+
+    public Node reverse1() {
+        if (head == null || head.next == null) {
+            return null;
+        }
+//        Node newHead = null;
+//        while (head.next != null){
+//            Node next = head.next;
+//            head.next = newHead;
+//            newHead = head;
+//            head = next;
+//        }
+//        return newHead;
+
+        Node prev = null;
+        Node curr = head;
+        while (curr != null) {
+            Node nextTemp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextTemp;
+        }
+        return prev;
+
     }
 
     // 判断链表是否为空
