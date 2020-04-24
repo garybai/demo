@@ -17,6 +17,20 @@ public class LinkedTest {
         }
     }
 
+    public static ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        // 两个指针分别从两个链表头节点开始
+        ListNode l1 = headA;
+        ListNode l2 = headB;
+        while (l1 != l2) {
+            // 指针分别向后遍历，第一条遍历完从第二条开始
+            l1 = l1 == null ? headB : l1.next;
+            // 第二条遍历完从第一条开始
+            l2 = l2 == null ? headA : l2.next;
+            // 两个指针指向同一个节点后退出循环
+        }
+        return l1;
+    }
+
     /**
      * 整个链表逆序
      *
