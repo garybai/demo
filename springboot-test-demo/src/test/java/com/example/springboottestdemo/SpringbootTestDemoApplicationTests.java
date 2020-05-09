@@ -55,6 +55,7 @@ public class SpringbootTestDemoApplicationTests {
     public void testController() {
 //        TestRestTemplate restTemplate = new TestRestTemplate();
         ResponseEntity<String> entity = restTemplate.getForEntity("/test?id={id}", String.class, 10);
+
         System.out.println(entity.getBody());
     }
 
