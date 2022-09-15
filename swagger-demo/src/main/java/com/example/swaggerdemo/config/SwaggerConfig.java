@@ -32,13 +32,6 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiInfo() {
-//        return new ApiInfo(
-//                "Spring Boot项目集成Swagger实例文档",
-//                "我的博客网站：https://www.bgyly.com，欢迎大家访问。",
-//                "API V1.0",
-//                "Terms of service",
-//                new Contact("GaryBai", "https://www.bgyly.com", "490000133@qq.com"),
-//                "Apache", "http://www.apache.org/", Collections.emptyList());
         return new ApiInfoBuilder().title("Spring Boot项目集成Swagger实例文档")
                 .description("我的博客网站：https://www.bgyly.com，欢迎大家访问。")
                 .version("API V1.0")
