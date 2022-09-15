@@ -13,14 +13,14 @@ public class Sort {
 
     public static void main(String[] args) {
         int[] arr = {7, 6, 5, 1, 3, 2};
-//        System.out.println(Arrays.toString(arr));
+        System.out.println(Arrays.toString(arr));
 //        bubboSort(arr, arr.length);
 //        insertionSort(arr, arr.length);
-//        selectionSort(arr, arr.length);
+        selectionSort(arr, arr.length);
 //        int[] arr1 = mergeSort(arr, arr.length);
 //        quickSort(arr, 0, arr.length - 1);
-//        System.out.println(Arrays.toString(arr));
-        System.out.println(aaa(12));
+        System.out.println(Arrays.toString(arr));
+//        System.out.println(aaa(12));
     }
 
 
@@ -176,6 +176,7 @@ public class Sort {
      * @date: 2020/3/4 11:09
      */
     private static void bubboSort(int[] a, int n) {
+        // int[] arr = {7, 6, 5, 1, 3, 2};
         if (n <= 1) {
             return;
         }

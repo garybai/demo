@@ -24,7 +24,8 @@ public class MyThreadFactory implements ThreadFactory {
      */
     @Override
     public Thread newThread(Runnable r) {
-        String myTheadName = "泡茶线程池-";
+//        String myTheadName = "泡茶线程池-";
+        String myTheadName = "餐厅线程-";
         return new Thread(r, myTheadName + myThreadNum.getAndIncrement());
     }
 }
