@@ -1,0 +1,17 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: dubbo-consumer-demo
+  main:
+    allow-bean-definition-overriding: true
+dubbo:
+  registry:
+    address: zookeeper://localhost:2181
+  protocol:
+    name: dubbo
+    port: 20880
+  scan:
+    base-packages: com.example.dubboconsumerdemo #如果消费者也需要提供服务的话，需要加上扫描包路径，这里的扫描路径，要根据自己实际的package来写
+  application:
+    name: dubbo-consumer-demo

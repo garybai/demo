@@ -1,0 +1,19 @@
+server:
+  port: 8000 #web服务端口
+spring:
+  application:
+    name: dubbo-provider-demo # 服务名称
+  main:
+    allow-bean-definition-overriding: true
+dubbo:
+  application:
+    name: dubbo-provider-demo #dubbo提供者名称
+  registry:
+    address: zookeeper://localhost:2181 #注册地址 使用zookeeper
+  scan:
+    base-packages: com.example.dubboproviderdemo #配置扫描路径，这里的扫描路径，要根据自己实际的package来写
+  protocol:
+    name: dubbo #使用dubbo协议
+    port: 20880 #协议端口为20880
+  provider:
+    timeout: 3000
